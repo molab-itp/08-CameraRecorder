@@ -10,8 +10,6 @@ import AVFoundation
 import Photos
 import CoreImage.CIFilterBuiltins
 
-
-
 class Model: NSObject, ObservableObject, AVCaptureFileOutputRecordingDelegate {
   @Published var session = AVCaptureSession()
   @Published var videoSaved = false
