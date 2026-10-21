@@ -2,7 +2,7 @@
 
 - apply core image filters to live video stream from camera
 - record button to save video to Photo library
-- minminal ObservableObject Model
+- minminal @Observable Model
 - no need for Combine!
 
 ## Plan
