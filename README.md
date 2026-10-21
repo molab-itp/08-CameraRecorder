@@ -1,29 +1,54 @@
 # [08-CameraRecorder](https://github.com/molab-itp/08-CameraRecorder)
+
 - apply core image filters to live video stream from camera
 - record button to save video to Photo library
 - minminal ObservableObject Model
 - no need for Combine!
+
 ## Plan
+
 - slider for filter param
+
 ## Sources
+
 - mainly claude.ai with alot of debugging
 - preview using FrameView from [08-FilterTheWorld](https://github.com/mobilelabclass-itp/08-FilterTheWorld)
+
 ## CoreImageFilterReference documentation
+
 - [CoreImageFilterReference ref](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html)
   -- list each filter and their parameters
+
 ## Changes
+
 - Detailed research
   - [CaptureRecorder](https://github.com/jht9629-nyu/CaptureRecorder.git)
 - added app icon
 - in ContentView re-org FilterSelectionView, RecordButtonView
+
 ```
 func FilterSelectionView() -> some View {}
 func RecordButtonView() -> some View {}
 ```
+
 - moved MovieRecorder to z-archived
-## rename in xcode is hell!
+
+## Notes
 
 ```
+2026-10-20 21:44:54
+in 08-CameraRecorder
+replace ObservableObject with @Observable macro
+
+in 08-CameraRecorder
+is now Observable, does it variables like currentEffect
+need to be marked ignored
+since it was not affecting swiftui
+when ObservableObject was used
+
+   var currentEffect: VideoEffect = .normal
+
+add @ObservationIgnored to match previous behavior
 
 >> delete unused CameraPreviewView.swift
 >> rename from MovieRecorder to CaptureRecorder
@@ -45,6 +70,7 @@ This app has crashed because it attempted to access privacy-sensitive data witho
 ```
 
 ## video-recorder-with-effects-1.swift
+
 - Movie recorded successfully
 - reduced effect to 3
 -
@@ -63,14 +89,21 @@ This app has crashed because it attempted to access privacy-sensitive data witho
 ```
 
 ## filtered-video-recorder-app.swift
+
 In AVFoundation AVCaptureSession AVCaptureFileOutputRecordingDelegate correctly apply filters to sample in captureOutput
 privide a swiftui app example of this
 nothing recorded
+
 ## video-recorder-with-effects-2.swift
+
 Crash on record
+
 ## video-recorder-with-effects-3.swift
+
 Crash - no video preview
+
 ## Details
+
 - https://claude.ai/chat/a6a7974f-915e-461a-b566-635b2ff08929
 
 ```
@@ -103,3 +136,5 @@ Initializer for conditional binding must have Optional type, not 'CIImage'
 
 **_ Terminating app due to uncaught exception 'NSGenericException', reason: '_** -[AVCaptureSession startRunning] startRunning may not be called between calls to beginConfiguration and commitConfiguration'
 ```
+
+## rename in xcode is hell!

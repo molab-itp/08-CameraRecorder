@@ -10,34 +10,35 @@ import AVFoundation
 import Photos
 import CoreImage.CIFilterBuiltins
 
-class Model: NSObject, ObservableObject, AVCaptureFileOutputRecordingDelegate {
-  @Published var session = AVCaptureSession()
-  @Published var videoSaved = false
-  @Published var previewImage: CGImage?
-  @Published var showingSavedAlert = false
-  @Published var selectedEffect: VideoEffect = .normal
-  var currentEffect: VideoEffect = .normal
-  var context: CIContext?
+@Observable
+class Model: NSObject, AVCaptureFileOutputRecordingDelegate {
+  var session = AVCaptureSession()
+  var videoSaved = false
+  var previewImage: CGImage?
+  var showingSavedAlert = false
+  var selectedEffect: VideoEffect = .normal
+  @ObservationIgnored var currentEffect: VideoEffect = .normal
+  @ObservationIgnored var context: CIContext?
 
-  private var videoDevice: AVCaptureDevice?
+  @ObservationIgnored private var videoDevice: AVCaptureDevice?
 
-  var videoOutput: AVCaptureMovieFileOutput?
-  var videoDataOutput: AVCaptureVideoDataOutput?
-  private var videoInput: AVCaptureDeviceInput?
-  private var videoWriter: AVAssetWriter?
+  @ObservationIgnored var videoOutput: AVCaptureMovieFileOutput?
+  @ObservationIgnored var videoDataOutput: AVCaptureVideoDataOutput?
+  @ObservationIgnored private var videoInput: AVCaptureDeviceInput?
+  @ObservationIgnored private var videoWriter: AVAssetWriter?
   //  private var videoWriterInput: AVAssetWriterInput?
   //  private var pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor?
   
   // -- AVAssetWriter
-  private var assetWriter: AVAssetWriter?
-  private var videoWriterInput: AVAssetWriterInput?
-  private var audioWriterInput: AVAssetWriterInput?
-  private var pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor?
+  @ObservationIgnored private var assetWriter: AVAssetWriter?
+  @ObservationIgnored private var videoWriterInput: AVAssetWriterInput?
+  @ObservationIgnored private var audioWriterInput: AVAssetWriterInput?
+  @ObservationIgnored private var pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor?
 //  private var currentFilter: FilterType = .comic
-  private var isSessionReady = false
-  private var isRecordingSession = false
-  private var videoURL: URL?
-  private var startTime: CMTime?
+  @ObservationIgnored private var isSessionReady = false
+  @ObservationIgnored private var isRecordingSession = false
+  @ObservationIgnored private var videoURL: URL?
+  @ObservationIgnored private var startTime: CMTime?
   
   override init() {
     super.init()

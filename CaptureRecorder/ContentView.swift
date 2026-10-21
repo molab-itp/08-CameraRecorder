@@ -5,7 +5,7 @@ import AVFoundation
 import Photos
 
 struct ContentView: View {
-  @StateObject var model = Model()
+  @State var model = Model()
   @State var isRecording = false
       
   var body: some View {
@@ -24,7 +24,7 @@ struct ContentView: View {
     }
     .alert("Video saved", isPresented: $model.showingSavedAlert) {
     }
-    .onReceive(model.$videoSaved) { saved in
+    .onChange(of: model.videoSaved) { _, saved in
       if saved {
         model.showingSavedAlert = true
         model.videoSaved = false
